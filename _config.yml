@@ -13,11 +13,11 @@ email: depowerwer@gmail.com
 #blog logo
 logo: "/assets/images/df_logo.jpg"
 # blog cover
-cover: "/assets/images/cA4aKEIPQrerBnp1yGHv_IMG_9534-3-2.jpg"
+cover: "/assets/images/intel.jpg"
 
 name: 'Sergio Pérez'
 author: 'Sergio Pérez'
-author_image: "/assets/images/author.jpg"
+author_image: "http://www.gravatar.com/avatar/c09f96e3d69b0808392cd75a197e199bfs=300"
 
 paginate:	5
 
