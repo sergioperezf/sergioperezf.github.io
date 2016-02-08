@@ -3,8 +3,10 @@ layout: post
 title:  "Implementando usuarios y permisos en Zend Framework 2"
 date:   2015-05-15 15:41:25
 categories: php
-tags: zf2 servicios
+tags: zf2 usuarios permisos acl
 image: /assets/article_images/2014-08-29-welcome-to-jekyll/desktop.jpg
+comments: true
+disqus_id: 9b1888cd-58d4-433b-b50f-8fa94aa96369
 ---
 
 El día de hoy vamos a crear un sistema funcional que implementa usuarios y permisos en Zend Framework 2, usando dos módulos muy populares para ello:
