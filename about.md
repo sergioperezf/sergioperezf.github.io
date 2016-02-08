@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-This is my blog. Noone else's. Mine. So I can publish whatever I want here.
+This is my programming blog. I'll publish code here, whenever I feel like it and have the time.
