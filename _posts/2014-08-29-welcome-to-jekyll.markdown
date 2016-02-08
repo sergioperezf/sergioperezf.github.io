@@ -28,7 +28,7 @@ Para empezar, vamos a crear nuestra aplicación con base en la aplicación esque
 
 Una vez tengamos la aplicación instalada, es hora de añadir los módulos que vamos a usar. Estos se añaden a el archovp `composer.json`, de modo que debe quedar más o menos así:
 
-```json
+~~~ json
 {
     "name": "seperez/application",
     "description": "Implementing a simple application with users ans permissions",
@@ -49,7 +49,7 @@ Una vez tengamos la aplicación instalada, es hora de añadir los módulos que v
         "bjyoungblood/bjy-authorize": "1.4.*"
     }
 }
-```
+~~~ 
 
 Guardamos el archivo, y corremos `php composer.phar update`, para actualizar e instalar los módulos necesarios.
 
@@ -63,7 +63,7 @@ Ahora que hemos añadido y descargado los módulos necesarios, vamos a tomar un 
 
 Para activar dichos módulos en nuestra aplicación, vamos al archivo `config/application.config.php` y añadimos los módulos al arreglo `modules`:
 
-```php
+~~~ php
 <?php
 return array(
     //...
@@ -78,7 +78,7 @@ return array(
     ),
     //...
 );
-```
+~~~ 
 
 Esto activará los módulos recién descargados en nuestra aplicación. El siguiente paso es configurarlos.
 
@@ -92,7 +92,7 @@ Como podemos ver, es un modelo muy sencillo.
 
 Para configurar Doctrine vamos a modificar (o agregar) dos archivos: `config/autoload/doctrine.global.php`y `config/autoload/doctrine.local.php`. En el primero vamos a configurar el nombre de la base de datos, el host y el puerto, mientras que en el segundo vamos a configurar las credenciales de acceso. La idea de tener los dos archivos por separado es que cuando subamos nuestro trabajo a un repositorio como GitHub o Sourceforge, sólo el archivo global se suba.
 
-```php
+~~~ php
 <?php
 //config/autoload/doctrine.global.php
 return array(
@@ -108,9 +108,9 @@ return array(
             ),
         )
 ));
-```
+~~~ 
 
-```php
+~~~ php
 <?php
 //config/autoload/doctrine.global.php
 return array(
@@ -125,13 +125,13 @@ return array(
             ),
         )
 ));
-```
+~~~ 
 
 En este caso estamos asumiendo que vamos a usar una base de datos MySql en localhost, cuyas credenciales son las dadas (application/password).
 
 Ahora vamos a decirle a Doctrine en dónde se encuentran las entidades para nuestra aplicación. En el archivo de configuración de nuestro módulo (por defecto `module/Application/config/module.config.php`, aunque yo recomiendo crear un módulo aparte), añadimos al arreglo que es retornado:
 
-```php
+~~~ php
 <?php
 return array(
 	//...
@@ -151,6 +151,6 @@ return array(
     ),
     //...
 );
-```
+~~~ 
 
 Esto le dirá a Doctrine que las entidades de nuestra aplicación se encuentran en el directorio `module/Application/src/Application/Entity`, y que tendrán el namespace `Application\Entity`.
