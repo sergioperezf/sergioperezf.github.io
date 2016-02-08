@@ -47,7 +47,7 @@ Una vez tengamos la aplicación instalada, es hora de añadir los módulos que v
         "bjyoungblood/bjy-authorize": "1.4.*"
     }
 }
-````
+```
 
 Guardamos el archivo, y corremos `php composer.phar update`, para actualizar e instalar los módulos necesarios.
 
@@ -62,6 +62,7 @@ Ahora que hemos añadido y descargado los módulos necesarios, vamos a tomar un 
 Para activar dichos módulos en nuestra aplicación, vamos al archivo `config/application.config.php` y añadimos los módulos al arreglo `modules`:
 
 ```php
+<?php
 return array(
     //...
     'modules' => array(
@@ -129,6 +130,7 @@ En este caso estamos asumiendo que vamos a usar una base de datos MySql en local
 Ahora vamos a decirle a Doctrine en dónde se encuentran las entidades para nuestra aplicación. En el archivo de configuración de nuestro módulo (por defecto `module/Application/config/module.config.php`, aunque yo recomiendo crear un módulo aparte), añadimos al arreglo que es retornado:
 
 ```php
+<?php
 return array(
 	//...
     'doctrine' => array(

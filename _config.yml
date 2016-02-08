@@ -1,15 +1,16 @@
 # Build settings
 markdown: redcarpet
-highlighter: pygments
+highlighter: rouge
 gems:
   - jemoji
+  - jekyll-paginate
   
 # Site settings
 title: "Sergio Pérez"
 description: > # this means to ignore newlines until "email:"
    Blog de Sergio Pérez
 
-email: depowerwer@gmail.com
+email: seperezf@hotmail.com
 #blog logo
 logo: "http://www.gravatar.com/avatar/c09f96e3d69b0808392cd75a197e199bfs=600"
 # blog cover
@@ -26,19 +27,6 @@ baseurl: ""
 
 # social icons and sharing options
 social:
-  - icon:	twitter
-    url:	https://twitter.com/chechoppefe
-    desc: Twitter
-    share_url: http://twitter.com/share
-    share_title: ?text=
-    share_link: "&amp;url="
-
-#  - icon:	facebook
-#    url:	https://facebook.com/???
-#    desc: Connect with me facebook
-#    share_url: https://www.facebook.com/sharer.php
-#    share_title: ?t=
-#    share_link: "&amp;u="
 
   - icon:	github
     url:	https://github.com/sergioperezf
@@ -47,9 +35,23 @@ social:
     share_title:
     share_link:
 
-#  - icon:	google-plus
-#    url:	https://google.com/???
-#    desc:	Add me on google+
-#    share_url:
-#    share_title:
-#    share_link:
+  - icon:	stack-overflow
+    url:	http://stackoverflow.com/users/1200802/chechopeefe?tab=profile
+    desc:	Stack Overflow
+    share_url:
+    share_title:
+    share_link:
+
+  - icon:	globe
+    url:	http://seperez.com
+    desc:	Portfolio
+    share_url:
+    share_title:
+    share_link:
+
+  - icon:	linkedin
+    url:	https://linkedin.com/in/sergio-perez-7a51173
+    desc:	LinkedIn
+    share_url:
+    share_title:
+    share_link:
