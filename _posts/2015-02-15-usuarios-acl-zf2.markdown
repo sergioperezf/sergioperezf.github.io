@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  "Implementando usuarios y permisos en Zend Framework 2"
-date:   2015-05-15 15:41:25
+date:   2015-02-15 15:41:25
 categories: php
 tags: zf2 usuarios permisos acl
-image: /assets/article_images/2014-08-29-welcome-to-jekyll/desktop.jpg
+image: /assets/article_images/2015-02-15-usuarios-acl-zf2/kid.jpg
 comments: true
 disqus_id: 9b1888cd-58d4-433b-b50f-8fa94aa96369
 ---
