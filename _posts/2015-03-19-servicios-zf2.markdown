@@ -389,3 +389,80 @@ use Application\Service\TicketService; // añadimos este use
 Por ahora sólo vamos a implementar ese método de nuestro servicio. 
 
 ## Registrando el servicio e inyección de dependencias
+
+Ahora vamos a registrar nuestro servicio en el `ServiceManager` de Zend Framework, de modo que podamos hacer uso de él simplemente llamando al `SeviceLocator`. Para esto, vamos a modificar el archivo `module\Application\config\module.config.php` de nuestro módulo, y añadimos al arreglo con clave `service_manager['factories']` la siguiente entrada:
+
+~~~
+'Application\Service\Ticket' => 'Application\Factory\TicketServiceFactory'
+~~~
+
+Esto le va a decir a Zend Framework que existe una clase factoría que retorna nuestro servicio. La razón por la que necesitamos una factoría en este caso, es porque nuestro servicio tiene una dependencia, el `EntityManager`, que estamos inyectando a en el constructor. A esto se refiere la inyección de dependencias, a pasar las dependencias de una clase por medio del constructor o de métodos `setters`, en vez de instanciarlas en la misma clase. 
+
+Nuestra factoría entonces va a ser una muy sencilla. La creamos en `module/Application/src/Application/Factory/TicketServiceFactory.php`:
+
+~~~ php
+<?php
+/**
+ * File: TicketServiceFactory.php.
+ */
+
+namespace Application\Factory;
+use Application\Service\TicketService;
+use Doctrine\ORM\EntityManager;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+/**
+ * Class TicketServiceFactory
+ * @package Application\Factory
+ */
+class TicketServiceFactory implements FactoryInterface
+{
+    /**
+     * Create service
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return TicketService
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        /** @var EntityManager $entityManager */
+        $entityManager = $serviceLocator->get('Doctrine\ORM\EntityManager');
+        return new TicketService($entityManager);
+    }
+}
+~~~
+
+Con esta factoría registrada en nuestra aplicación, podemos cambiar la acción de nuestro controlador para que use nuestro servicio recién registrado:
+
+
+~~~ php
+<?php
+// ...
+
+    //...
+    /**
+     * Only users that can read tickets can list them.
+     */
+    public function listAction()
+    {
+        if (!$this->isAllowed('Ticket', 'read')) {
+            throw new UnAuthorizedException();
+        }
+
+        /** @var TicketService $service */
+        $service = $this->getServiceLocator()->get('Application\Service\Ticket');
+        $tickets = $service->getAllTickets();
+
+        foreach ($tickets as $ticket) {
+            echo $ticket->getTitle() . ', by ' . $ticket->getCreator()->getEmail() . '<br/>';
+        }
+        return false;
+    }
+    // ...
+~~~
+
+Si vamos a `/application/ticket/list`, veremos que nuestro sitio sigue funcionando como siempre. Lo único que ha cambiado es que ahora, si por alguna razón nuestro `TicketService` tiene nuevas dependencias, podemos añadirlas fácilmente en la factoría, y tener el servicio funcional en todas las ocasiones en que lo llamemos usando el `ServiceLocator`.
+
+Hay que recordar que en nuestro ejemplo, cuando hacemos el llamado a `$this->getServiceLocator()->get('Application\Service\Ticket');`, `'Application\Service\Ticket'` no es más que el nombre que le dimos a nuestro servicio cuando lo registramos en el Service Manager. En Zend Framework 2, la convención parece ser que los nombres de los servicios son parecidos a los nombres canónicos de las clases, sin la palabra `Service` al final. Pero bien hubiéramos podido registrar nuestro servicio con cualquier otro nombre, y llamarlo así desde el `ServiceLocator`.
+ 
