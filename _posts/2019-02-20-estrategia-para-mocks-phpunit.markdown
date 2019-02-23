@@ -117,10 +117,16 @@ Sin embargo, solo con mockear las respuestas del método no es suficiente. Para 
 
 ### Métodos `with` y `expect`
 
+El método `with` controla que los llamados a los métodos de la dependencia mockeada sean hechos con los argumentos correctos. Cualquier argumento inadecuado hará fallar el test.
 
+Por otro lado, el método `expects` controla la cantidad de veces que dicho método será llamado. En el caso del ejemplo, la implentación únicamente llama a los métodos una vez cada uno, por lo que usamos `$this->once()`. Cualquier fallo en llamar a esos métodos exactamente ese número de veces, resultará así mismo en una falla del test.
+
+Tembién se puede usar `$this->any()`, así como otras opciones que están descritas en la documentación de Phpunit.
 
 ## Regla para mockear objetos
 
 Una regla que suelo seguir cuando trato de decidir si mockar un objeto o no, es mirar si el objeto es externo a la clase específica que estoy probando. Si es así, a menos de que sea un objeto muy sencillo, construyo un mock.
 
-Como ejemplo, 
+En el ejemplo anterior, la única dependencia externa era el servicio `UserService`, pero en projectos de mayor complejidad la distinción entre qué mockear y qué no puede ser más difícil.
+
+Otra cosa a tener en cueta, es que una vez de usa `expects` y `with` en un método mockeado, no es posible volver a definirlos en el mismo mock. Es por eso que es buena práctica definir un mock diferente para casa test, en la función `setup` de nuestra clase de tests, por ejemplo.
