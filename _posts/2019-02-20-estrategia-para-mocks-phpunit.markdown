@@ -4,7 +4,7 @@ title:  "Tests unitarios con PHPUnit: mocks."
 date:   2019-02-20 16:58:25
 categories: php
 tags: phpunit tests unittests mocks
-image: /assets/article_images/2016-03-29-drupal-eliminar-feature-fields/trash.jpg
+image: /assets/article_images/2019-02-20-estrategia-para-mocks-phpunit/plane.jpg
 comments: true
 disqus_id: B8766D25-70FA-45AC-AC68-90EBCB38AD9B
 ---
@@ -15,7 +15,7 @@ Una de las mejoras prácticas mejor aceptadas en el desarrollo es el uso de Test
 
 Para aliviar esto, PHPUnit provee una manera fácil de crear Mocks. 
 
-## `MockBuilder`
+## `MockBuilder`
 
 Estando en una clase que implementa `TestCase`, tenemos a nuestra disposición el método `getMockBuilder`. Este método recibe como parametro el tipo del objeto que queremos mockear, y retornará el mock de dicho objeto al llamar `getMock()`.
 
