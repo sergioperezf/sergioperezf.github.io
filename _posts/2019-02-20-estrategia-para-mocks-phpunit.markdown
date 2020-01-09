@@ -11,7 +11,7 @@ disqus_id: B8766D25-70FA-45AC-AC68-90EBCB38AD9B
 
 # Tests unitarios con PHPUnit: mocks.
 
-Una de las mejoras prácticas mejor aceptadas en el desarrollo es el uso de Tests unitarios para probar que los componentes de nuestro código funcionen como se espera. Sin embargo, cuando tenemos que nuestro proyecto es muy complejo, y los componentes unitarios de nuestro código tienen muchas dependencias en muchas otras partes deñ código, realizar estos tests suele ser bastante difícil.
+Una de las buenas prácticas mejor aceptadas en el desarrollo es el uso de Tests unitarios para probar que los componentes de nuestro código funcionen como se espera. Sin embargo, cuando tenemos que nuestro proyecto es muy complejo, y los componentes unitarios de nuestro código tienen muchas dependencias en muchas otras partes del código, realizar estos tests suele ser bastante difícil.
 
 Para aliviar esto, PHPUnit provee una manera fácil de crear Mocks. 
 
@@ -34,9 +34,13 @@ $user->setName('Bob');
 $userServiceMock = $this->getMockBuilder(UserService::class)->getMock();
 $userServiceMock->setMethods(['getUsers'])->method('getUsers')
     ->will($this->returnValue([$user]));
+
+// We can also use:
+$userServiceMock->setMethods(['getUsers'])->method('getUsers')
+    ->willReturn([$user]);
 ```
 
-En este caso, lo que estamos diciendo es que todas las llamadas al método `getUsers` de `UserService` que se hagan dentro del contexto del test van a retornar un arreglo con exactamente un usuario, que definimos arriba. Esto nos permite controlar la respuesta de componentes externos a nuestra clase, de manera que si un el método que estamos probando falla el error está con toda seguridad dentro de la implementación.
+En este caso, lo que estamos diciendo es que todas las llamadas al método `getUsers` de que se hagan al objeto `$userServiceMock` van a retornar un arreglo con exactamente un usuario, que definimos arriba. Esto nos permite controlar la respuesta de componentes externos a nuestra clase, de manera que si un el método que estamos probando falla el error está con toda seguridad dentro de la implementación del método que estamos probando.
 
 ### Assertions en la llamada de los métodos
 
@@ -67,7 +71,7 @@ class UserEnhancer
 }
 ```
 
-En el ejemplo estamos usando inyección de dependencias para asegurarnos de que desde fuera de la clase, en el momento de implementación, tenemos control sobre qué dependencias vamos a usar. De este modo, al momento de instanciar la clase en nuestro test, no inyectamos una instancia original de `UserService`, sino el mock que vamos a construír.
+En el ejemplo estamos usando inyección de dependencias para asegurarnos de que desde fuera de la clase. En el momento de implementación, tenemos control sobre qué dependencias vamos a usar. De este modo, al momento de instanciar la clase en nuestro test, no inyectamos una instancia original de `UserService`, sino el mock que vamos a construír.
 
 Veamos cómo podría ser el mock del _happy path_ de nuestro método `enhance`:
 
@@ -90,13 +94,12 @@ class UserEnhancerTest extends TestCase
 
         // Here's where the magic happens
         $userServiceMock
-            ->expects($this->once())
+            ->expects($this->exactly(2))
             ->method('getUserById')
             ->with(1)
             ->will($this->returnValue([$user]));
 
         $userServiceMock
-            ->expects($this->once())
             ->method('canUserBeEnhanced')
             ->with($user)
             ->will($this->returnValue(true));
@@ -113,19 +116,19 @@ class UserEnhancerTest extends TestCase
 
 La manera en que este test funciona es mockeando las respuestas de los médotos de `UserService`.
 
-Sin embargo, solo con mockear las respuestas del método no es suficiente. Para que el test se pueda considerar completo, tenemos que controlar también que las llamadas a dichos métodos sean las adecuadas. Para esto, usamos `with()`, en conjunción con `expects()`. 
+Sin embargo, solo con mockear las respuestas del método no es suficiente. Para que el test se pueda considerar completo, tenemos que controlar también que las llamadas a dichos métodos sean las adecuadas. Esto debido a que queremos asegurarnos de que nuestro componente usa de manera adecuada sus dependencias. Para esto, usamos `with()`, en conjunción con `expects()`. 
 
 ### Métodos `with` y `expect`
 
 El método `with` controla que los llamados a los métodos de la dependencia mockeada sean hechos con los argumentos correctos. Cualquier argumento inadecuado hará fallar el test.
 
-Por otro lado, el método `expects` controla la cantidad de veces que dicho método será llamado. En el caso del ejemplo, la implentación únicamente llama a los métodos una vez cada uno, por lo que usamos `$this->once()`. Cualquier fallo en llamar a esos métodos exactamente ese número de veces, resultará así mismo en una falla del test.
+Por otro lado, el método `expects` controla la cantidad de veces que *cualquier método de dicho mock* será llamado. En el caso del ejemplo, la implentación únicamente llama a los métodos una vez cada uno, por lo que usamos `$this->exactly(2)`. Cualquier fallo en llamar a los métodos exactamente ese número de veces, resultará así mismo en una falla del test.
 
 Tembién se puede usar `$this->any()`, así como otras opciones que están descritas en la documentación de Phpunit.
 
 ## Regla para mockear objetos
 
-Una regla que suelo seguir cuando trato de decidir si mockar un objeto o no, es mirar si el objeto es externo a la clase específica que estoy probando. Si es así, a menos de que sea un objeto muy sencillo, construyo un mock.
+Una regla que suelo seguir cuando trato de decidir si mockear un objeto o no, es mirar si el objeto es externo a la clase específica que estoy probando. Si es así, a menos de que sea un objeto muy sencillo, construyo un mock.
 
 En el ejemplo anterior, la única dependencia externa era el servicio `UserService`, pero en projectos de mayor complejidad la distinción entre qué mockear y qué no puede ser más difícil.
 
