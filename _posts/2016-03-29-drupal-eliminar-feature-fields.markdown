@@ -7,6 +7,8 @@ tags: drupal drupal7 features
 image: /assets/article_images/2016-03-29-drupal-eliminar-feature-fields/trash.jpg
 comments: true
 disqus_id: BD172294-3B52-41B7-A766-F260DBDBC3EC
+summary: >
+    El módulo **Features** de Drupal 7 es uno de los módulos más útiles cuando queremos manejar en código configuraciones como variables de entorno, vocabularios de taxonomías o servicios web. Veremos cómo eliminar campos por medio de configuración.
 ---
 
 El módulo **Features** de Drupal es uno de los módulos más útiles cuando queremos manejar en código configuraciones como variables de entorno, vocabularios de taxonomías o servicios web. Uno de los usos más extensos que se da de este módulo es el manejo de tipos de contenido. Gracias este módulo, podemos exportar nuestros tipos de contenido personalizados a un módulo _featurizado_ en código, que podemos instalar en cualquier instancia de Drupal para replicarlos fácilmente. 

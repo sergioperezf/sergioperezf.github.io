@@ -7,9 +7,9 @@ tags: phpunit tests unittests mocks
 image: /assets/article_images/2019-02-20-estrategia-para-mocks-phpunit/plane.jpg
 comments: true
 disqus_id: B8766D25-70FA-45AC-AC68-90EBCB38AD9B
+summary: >
+    Cómo escribir mocks de las dependencias de nuestras clases cuando estamos haciendo pruebas unitarias, en PHPUnit.
 ---
-
-# Tests unitarios con PHPUnit: mocks.
 
 Una de las buenas prácticas mejor aceptadas en el desarrollo es el uso de Tests unitarios para probar que los componentes de nuestro código funcionen como se espera. Sin embargo, cuando tenemos que nuestro proyecto es muy complejo, y los componentes unitarios de nuestro código tienen muchas dependencias en muchas otras partes del código, realizar estos tests suele ser bastante difícil.
 

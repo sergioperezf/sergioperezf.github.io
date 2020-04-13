@@ -7,6 +7,8 @@ tags: zf2 usuarios permisos acl
 image: /assets/article_images/2015-02-15-usuarios-acl-zf2/kid.jpg
 comments: true
 disqus_id: 9b1888cd-58d4-433b-b50f-8fa94aa96369
+summary: >
+    El día de hoy vamos a construír la primera parte de un sistema de tickets en Zend Framework 2, específicamente la parte de usuarios y permisos, usando dos módulos muy populares para ello, `zfc-user` y `bjyauthorize`.
 ---
 
 El día de hoy vamos a construír la primera parte de un sistema de tickets en Zend Framework 2, específicamente la parte de usuarios y permisos, usando dos módulos muy populares para ello:

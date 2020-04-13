@@ -25,8 +25,6 @@ $font-sans: Open Sans, MundoSans, "Helvetica Neue", Arial, Helvetica, sans-serif
 main
   display: block
 
-
-
 body
   font-family: $font-sans
   margin: 0
@@ -130,9 +128,11 @@ body
 
 .content
   width: 100%
-  max-width: 640px
+  padding-left: 400px
   margin: 0 auto
   @include box-sizing(border-box)
+  @include respond-to(960)
+    padding-left: 200px
   @include respond-to(800)
     padding: 0 $rs*2
   article
@@ -234,81 +234,9 @@ body
     &:hover
       color: #333
 .post
-  .article-image
-    position: absolute
-    background-color: #000
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    overflow: hidden
-    .post-image-image
-      background-size: cover
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: 0
-      text-indent: -9999px
-      padding-top: 33%
-      z-index: 1
-    .post-meta
-      position: absolute
-      bottom: $rs*5
-      left: 30%
-      right: 30%
-      z-index: 9
-      font-family: $font-sans
-      @include box-sizing(border-box)
-      @include respond-to(800)
-        left: $rs
-        right: $rs
-    .post-title
-      font-weight: 700
-      font-style: normal
-      letter-spacing: -0.04em
-      font-size: 50px
-      line-height: 1.1
-      color: #fff
-      margin-bottom: 16px
-      text-shadow: 0px 1px 16px rgba(0,0,0,0.5), 0px 0px 1px rgba(0,0,0,0.5)
-    .author-image
-      display: inline-block
-      width: 30px
-      height: 30px
-      line-height: 30px
-      margin-right: 8px
-      margin-bottom: -10px
-      float: left
-      background-size: cover
-      border-radius: 100%
-      text-indent: -9999px
-    .author-name
-      display: inline
-    .post-meta-text
-      color: rgba(255,255,255,0.75)
-      letter-spacing: -0.02em
-      font-weight: 400
-      font-style: normal
-      text-shadow: 0px 1px 4px rgba(0,0,0,0.25), 0px 0px 1px rgba(0,0,0,0.5)
-      font-size: 14px
-      overflow: hidden
-      font-family: $font-sans
-      white-space: nowrap
-      text-overflow: ellipsis
-      a
-        color: rgba(255,255,255,0.75)
-        &:hover
-          color: rgba(255,255,255,1)
-    .fa-angle-down
-      font-size: 32px
-      margin: 64px auto 0
-      color: rgba(255,255,255,0.75)
-      &:hover
-        color: #fff
-    .topofpage
-      text-decoration: underline
   .noarticleimage
+    padding: 0 120px
+    margin-bottom: 80px
     .post-meta
       font-family: $font-sans
       padding-top: 60px
@@ -344,9 +272,9 @@ body
       white-space: nowrap
       text-overflow: ellipsis
   .post-content
-    width: 100%
     font-family: $font-serif
     color: #333
+    padding: 0 120px
     h1, h2, h3
       font-family: $font-sans
     h3, h4, h5, h6
@@ -377,6 +305,8 @@ body
       -webkit-hyphens: auto
       -moz-hyphens: auto
       hyphens: auto
+    pre
+      font-size: 15px
     a
       color: #333
       text-decoration: underline
@@ -435,6 +365,7 @@ body
   .bottom-teaser
     padding: 50px 0
     font-family: $font-sans
+    padding: 0 120px
     hr
       border: 0
       padding: 0
@@ -585,15 +516,14 @@ body
 
 #disqus_thread
   margin-top: 50px
+  padding: 0 120px
 .post-tag-articleimage
   display: none
 
 pre,
 code
-  font-size: 15px
   border: 1px solid #e8e8e8
   border-radius: 3px
-  background-color: #eef
 
 code
   padding: 1px 5px
@@ -605,3 +535,26 @@ pre
     border: 0
     padding-right: 0
     padding-left: 0
+
+.page
+  display: flex
+  flex-direction: row
+
+.sidebar
+  background-image: url(/assets/images/tall.jpg)
+  width: 400px
+  height: 100vh
+  position: fixed
+  z-index: 2
+  background-size: cover
+  background-position: center
+  @include respond-to(960)
+    width: 200px
+  @include respond-to(800)
+    display: none
+.default-content
+    padding: 0px 120px
+    margin: 0 auto
+    max-width: 960px
+    @include respond-to(800)
+      padding: 0px 40px

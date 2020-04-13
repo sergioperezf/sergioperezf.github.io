@@ -6,9 +6,7 @@ gems:
   - jekyll-paginate
   
 # Site settings
-title: "Sergio Pérez"
-description: > # this means to ignore newlines until "email:"
-   Blog de Sergio Pérez
+title: "Blog de Sergio Pérez"   
 
 email: seperezf@hotmail.com
 #blog logo

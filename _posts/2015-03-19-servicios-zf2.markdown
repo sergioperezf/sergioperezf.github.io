@@ -7,6 +7,8 @@ tags: zf2 servicios
 image: /assets/article_images/2015-03-19-servicios-zf2/restaurant.jpg
 comments: true
 disqus_id: a9e00b05-57e6-4e0b-845b-4b4fd1f33d06
+summary: >
+    En la entrada del día de hoy vamos a ver cómo podemos hacer plantear la arquitectura de una aplicación MVC en Zend Framework 2 usando una capa de servicios entre en los controladores y el modelo.
 ---
 
 En la entrada del día de hoy vamos a ver cómo podemos hacer plantear la arquitectura de una aplicación MVC en Zend Framework 2 usando una capa de servicios entre en los controladores y el modelo. Realmente, muchas aplicaciones MVC hacen uso de este patrón en la vida real, no necesariamente apliaciones hechas con ZF2 o ni siquiera con PHP. Pero en esta entrada me voy a enfocar en demostrar cómo se puede legar a hacer con este framework en específico.
